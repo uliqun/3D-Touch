@@ -12,7 +12,7 @@
 @interface ViewController () <UIViewControllerPreviewingDelegate>
 
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
-
+@property (nonatomic, strong) NSNumber *cnt;
 @end
 
 @implementation ViewController
@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.cnt=@0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -50,7 +51,7 @@
         // handle a 3D Touch alternative (long gesture recognizer)
         self.longPress.enabled = YES;
         
-        }
+    }
 }
 
 - (UILongPressGestureRecognizer *)longPress {
@@ -71,11 +72,18 @@
     if ([self.presentedViewController isKindOfClass:[PreviewViewController class]]) {
         return nil;
     }
+    self.cnt=@(self.cnt.intValue+1);
     
     // shallow press: return the preview controller here (peek)
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *previewController = [storyboard instantiateViewControllerWithIdentifier:@"PreviewView"];
-    
+    //    previewController =[[UIViewController alloc]init];
+    //    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0,0, 200,200)];
+    //    [view setBackgroundColor:[UIColor redColor]];
+    //    [previewController.view addSubview:view];
+    //    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    //    label.text=[NSString stringWithFormat:@"counter is %@",self.cnt];
+    //    [view addSubview:label];
     return previewController;
 }
 
@@ -99,7 +107,19 @@
     [self check3DTouch];
 }
 
-
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch *touch in touches) {
+        CGFloat force = touch.force;
+        CGFloat percentage = force/touch.maximumPossibleForce;
+        CGPoint po=[touch locationInView:touch.view];
+        NSLog(@"%f %f",po.x,po.y);
+        NSLog(@"Printing force : %f", force);
+        NSLog(@"Printing percentage: %f", percentage);
+        NSLog(@"Printing maximum possible force: %f",    touch.maximumPossibleForce);
+        // break;
+    }
+}
 #pragma mark - 3D Touch Alternative
 
 - (void)showPeek {

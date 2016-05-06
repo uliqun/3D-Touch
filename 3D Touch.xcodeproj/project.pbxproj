@@ -219,7 +219,7 @@
 				TargetAttributes = {
 					D20FACAD1BB039DE00662806 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = F34HMY85N9;
+						DevelopmentTeam = QH9XN9AUR2;
 					};
 					D20FACC61BB039DF00662806 = {
 						CreatedOnToolsVersion = 7.0;
@@ -433,7 +433,7 @@
 				INFOPLIST_FILE = "3D Touch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.versluis.3D-Touch";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.q.3D-Touch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -448,7 +448,7 @@
 				INFOPLIST_FILE = "3D Touch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.versluis.3D-Touch";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.q.3D-Touch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
