@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) NSNumber *cnt;
+@property (nonatomic, strong) UITextView *textView;
 @end
 
 @implementation ViewController
@@ -21,6 +22,9 @@
     
     [super viewDidLoad];
     self.cnt=@0;
+    self.textView=[[UITextView alloc] initWithFrame:CGRectMake(0, 100, 300,370 )];
+    [self.view addSubview:self.textView];
+    [self.textView setAlpha:0.3];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,6 +71,7 @@
 # pragma mark - 3D Touch Delegate
 
 - (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location {
+    if (location.y<200) return nil;
     
     // check if we're not already displaying a preview controller
     if ([self.presentedViewController isKindOfClass:[PreviewViewController class]]) {
@@ -106,20 +111,26 @@
     
     [self check3DTouch];
 }
-
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    CGPoint po;
+    CGFloat force;
     for (UITouch *touch in touches) {
-        CGFloat force = touch.force;
+        force = touch.force;
         CGFloat percentage = force/touch.maximumPossibleForce;
-        CGPoint po=[touch locationInView:touch.view];
+        po=[touch locationInView:touch.view];
         NSLog(@"%f %f",po.x,po.y);
         NSLog(@"Printing force : %f", force);
+    
         NSLog(@"Printing percentage: %f", percentage);
         NSLog(@"Printing maximum possible force: %f",    touch.maximumPossibleForce);
-        // break;
+        
     }
+     self.textView.text=[[NSString stringWithFormat:@"force = %f,x = %f, y = %f \r   ", force,po.x,po.y]stringByAppendingString:self.textView.text];
+    if (self.textView.text.length>1500)self.textView.text=[self.textView.text substringWithRange:NSMakeRange(0, 1500)];
+    
 }
+
 #pragma mark - 3D Touch Alternative
 
 - (void)showPeek {
